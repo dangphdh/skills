@@ -1,0 +1,4 @@
+source_id,object_name,object_type,definition,grain,candidate_keys,data_classification,evidence_ids,status
+SRC-001,extracts/party_sample.csv,file,One file of synthetic party records with effective-dated versions,one row per party per effective period,party_id;effective_from,internal-synthetic,EVD-0006,draft
+SRC-002,extracts/loan_account_sample.csv,file,One file of synthetic loan account records with currency and portfolio segment,one row per loan account,loan_account_id,internal-synthetic,EVD-0001,draft
+SRC-003,extracts/loan_event_sample.csv,file,One file of synthetic signed loan events including fee and reversal rows,one row per loan event,event_id,internal-synthetic,EVD-0002;EVD-0003;EVD-0007;EVD-0008,draft

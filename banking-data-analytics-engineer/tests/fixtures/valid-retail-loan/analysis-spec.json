@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "PRJ-0001",
+    "title": "Retail loan principal movement analysis (synthetic example)"
+  },
+  "status": "draft",
+  "enabled_workstreams": [
+    "domain-modeling",
+    "product-discovery",
+    "data-mining",
+    "quality-reconciliation"
+  ],
+  "business_question": "Which synthetic portfolio segments show unusual monthly net principal movement or principal event activity in the approved sample extract?",
+  "intended_decision": "Prioritize which synthetic portfolio segments to review first in the next planning cycle.",
+  "environment": "Offline synthetic extract files only; no production, core-banking, or network connectivity.",
+  "data_classification": "internal-synthetic",
+  "time_context": {
+    "as_of_date": "2026-06-30",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "cutoff": "2026-06-30 23:59:59"
+  },
+  "platform": {
+    "dialect": "postgresql",
+    "dialect_validation": "DIALECT_UNVALIDATED"
+  },
+  "owners": {
+    "business": "Example Business Owner",
+    "data": "Example Data Owner",
+    "reviewer": "Example Reviewer"
+  },
+  "human_approval": {
+    "name": "",
+    "date": ""
+  },
+  "artifacts": {
+    "evidence_ledger": "evidence-ledger.csv",
+    "source_inventory": "source-inventory.csv",
+    "glossary": "glossary.csv",
+    "model_spec": "model-spec.json",
+    "query_spec": "query-spec.json",
+    "metric_catalog": "metric-catalog.csv",
+    "source_to_target": "source-to-target.csv",
+    "quality_rules": "quality-rules.csv",
+    "reconciliation_plan": "reconciliation-plan.json",
+    "review_summary": "review-summary.md"
+  }
+}

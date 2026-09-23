@@ -1,0 +1,4 @@
+loan_account_id,party_id,opening_date,currency_code,segment
+LN-2001,P-1001,2025-11-10,VND,mass
+LN-2002,P-1002,2026-01-15,USD,mass
+LN-2003,P-1003,2026-04-01,VND,sme

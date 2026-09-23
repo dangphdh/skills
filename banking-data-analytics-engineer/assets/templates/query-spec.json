@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "query_id": "QUERY_ID",
+  "status": "draft",
+  "business_question": "REPLACE_WITH_BUSINESS_QUESTION",
+  "evidence_ids": [],
+  "verified_sources": [],
+  "result_grain": "",
+  "population": "REPLACE_WITH_POPULATION_DEFINITION",
+  "exclusions": [],
+  "metrics": [],
+  "time_basis": {
+    "type": "",
+    "timezone": "",
+    "cutoff": ""
+  },
+  "currency_basis": {
+    "mode": "",
+    "currencies": [],
+    "conversion_rule": ""
+  },
+  "dialect": "",
+  "dialect_validation": "DIALECT_UNVALIDATED",
+  "expected_row_behavior": "REPLACE_WITH_EXPECTED_ROW_BEHAVIOR",
+  "validation_checks": []
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "query_id": "QRY-0001",
+  "status": "draft",
+  "business_question": "Which synthetic portfolio segments show unusual monthly net principal movement or principal event activity?",
+  "evidence_ids": ["EVD-0001", "EVD-0002", "EVD-0004", "EVD-0005", "EVD-0007", "EVD-0008"],
+  "verified_sources": [
+    "extracts/loan_account_sample.csv",
+    "extracts/loan_event_sample.csv"
+  ],
+  "result_grain": "one row per loan account per calendar month of event effective date",
+  "population": "Synthetic loan accounts opened on or before the as-of date with at least one in-scope principal event on or before the cutoff",
+  "exclusions": [
+    "fee events (event_type FEE) and their reversal rows",
+    "reversed principal events removed together with their reversal rows (matched-pair semantics, EVD-0008)",
+    "duplicate extract rows suppressed by the event_id and account_id dedup guards (QR-001, QR-005)",
+    "events effective after the cutoff"
+  ],
+  "metrics": [
+    {
+      "metric_id": "MTR-0001",
+      "name": "net_principal_movement",
+      "formula": "sum(event_amount) over in-scope principal events (DISBURSEMENT positive, PRINCIPAL_REPAYMENT negative), after matched-pair removal of reversed events and their reversal rows, grouped by calendar month of effective_date",
+      "unit": "amount",
+      "currency": "account_currency",
+      "evidence_ids": ["EVD-0002", "EVD-0008"]
+    },
+    {
+      "metric_id": "MTR-0002",
+      "name": "principal_event_count",
+      "formula": "count of in-scope principal event rows per calendar month after dedup and matched-pair reversal removal; fee events and reversal rows are not counted",
+      "unit": "count",
+      "currency": "not_applicable",
+      "evidence_ids": ["EVD-0002"]
+    }
+  ],
+  "time_basis": {
+    "type": "event_effective_date_grouped_by_calendar_month",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "cutoff": "2026-06-30 23:59:59"
+  },
+  "currency_basis": {
+    "mode": "multi_currency",
+    "currencies": ["VND", "USD"],
+    "conversion_rule": "not converted - results remain partitioned by account currency; FX conversion policy is unresolved and tracked as EVD-0005, so no rate or base currency is applied"
+  },
+  "dialect": "postgresql",
+  "dialect_validation": "DIALECT_UNVALIDATED",
+  "expected_row_behavior": "One row per loan account per calendar month containing at least one in-scope principal event after dedup and matched-pair reversal removal. Months with no in-scope principal events produce no row (no calendar spine). Amounts stay in account currency; rows are never summed across currency_code.",
+  "validation_checks": [
+    "row count equals the count of distinct (loan_account_id, event_month) pairs",
+    "per-currency sum of net_principal_movement ties to reconciliation control CTRL-002, partitioned by currency_code",
+    "reversal probe: dropped originals equal the number of in-scope REVERSAL rows with resolvable reversal_link_id (QR-004)",
+    "duplicate probe: zero event_id values with more than one scoped row before the dedup guard (QR-001)",
+    "NULL-amount probe: rows with NULL event_amount counted and listed separately (QR-002); excluded from sums, not silently dropped"
+  ]
+}

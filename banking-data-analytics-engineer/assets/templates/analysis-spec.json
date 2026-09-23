@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "PROJECT_ID",
+    "title": "PROJECT_TITLE"
+  },
+  "status": "draft",
+  "enabled_workstreams": [],
+  "business_question": "REPLACE_WITH_BUSINESS_QUESTION",
+  "intended_decision": "REPLACE_WITH_DECISION_THIS_ANALYSIS_INFORMS",
+  "environment": "REPLACE_WITH_ENVIRONMENT_DESCRIPTION (offline extracts only; no live connections)",
+  "data_classification": "REPLACE_WITH_DATA_CLASSIFICATION",
+  "time_context": {
+    "as_of_date": "",
+    "timezone": "",
+    "cutoff": ""
+  },
+  "platform": {
+    "dialect": "",
+    "dialect_validation": "DIALECT_UNVALIDATED"
+  },
+  "owners": {
+    "business": "",
+    "data": "",
+    "reviewer": ""
+  },
+  "human_approval": {
+    "name": "",
+    "date": ""
+  },
+  "artifacts": {
+    "evidence_ledger": "evidence-ledger.csv",
+    "source_inventory": "source-inventory.csv",
+    "glossary": "glossary.csv",
+    "model_spec": "model-spec.json",
+    "query_spec": "query-spec.json",
+    "metric_catalog": "metric-catalog.csv",
+    "source_to_target": "source-to-target.csv",
+    "quality_rules": "quality-rules.csv",
+    "reconciliation_plan": "reconciliation-plan.json",
+    "review_summary": "review-summary.md"
+  }
+}

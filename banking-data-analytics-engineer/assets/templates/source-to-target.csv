@@ -1,0 +1,1 @@
+mapping_id,source_object,source_field,target_object,target_field,target_definition,target_logical_type,nullable,transformation_rule,join_rule,filter_rule,default_rule,grain_impact,data_classification,evidence_ids,quality_checks,unresolved_issue,owner,review_state

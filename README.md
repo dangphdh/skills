@@ -8,6 +8,7 @@ Source gốc các skill đang chạy: `C:\Users\Dang Pham\.agents\skills\`
 
 | Skill | Mô tả |
 |---|---|
+| `banking-data-analytics-engineer` | Hỗ trợ discovery, data mining, thiết kế data model, SQL review, source-to-target mapping, data quality và reconciliation cho dữ liệu ngân hàng theo quy trình draft-and-validate. |
 | `deep-research` | Nghiên cứu chuyên sâu nhiều vòng với trích dẫn nguồn, dùng parallel research subagents + web search. Xuất báo cáo markdown có trích dẫn. |
 | `find-skills` | Giúp khám phá và cài đặt agent skills từ hệ sinh thái mở khi cần mở rộng khả năng. |
 | `kids-curriculum` | Thiết kế chương trình học + bài giảng + workbook Toán và Tiếng Anh cho học sinh lớp 3–5 (theo Chương trình GDPT 2018), xuất PDF/DOCX. |

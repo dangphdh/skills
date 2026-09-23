@@ -1,0 +1,9 @@
+rule_id,object_name,field_name,quality_dimension,rule_expression,severity,threshold,owner,evidence_ids,status
+QR-001,LOAN_EVENT,event_id,uniqueness,event_id is unique across LOAN_EVENT,error,0 duplicates,Example Analyst,EVD-0002,draft
+QR-002,LOAN_EVENT,event_amount,validity,"event_amount is present and parses as decimal(18,2)",error,0 failures,Example Analyst,EVD-0002,draft
+QR-003,LOAN_ACCOUNT,opening_date,completeness,opening_date is present for every loan account,warning,0 missing values,Example Analyst,EVD-0001,draft
+QR-004,LOAN_EVENT,reversal_link_id,validity,reversal_link_id references an existing event_id when present and no original is reversed by more than one reversal row,error,0 orphan or double-linked references,Example Analyst,EVD-0003;EVD-0008,draft
+QR-005,LOAN_ACCOUNT,loan_account_id,uniqueness,loan_account_id is unique across LOAN_ACCOUNT,error,0 duplicates,Example Analyst,EVD-0001,draft
+QR-006,PARTY,party_id with effective_from,uniqueness,party_id plus effective_from is unique across PARTY,error,0 duplicate version keys,Example Analyst,EVD-0006,draft
+QR-007,LOAN_EVENT,event_type,validity,event_type is one of the documented codes DISBURSEMENT PRINCIPAL_REPAYMENT FEE REVERSAL,error,0 undocumented codes,Example Analyst,EVD-0002;EVD-0007,draft
+QR-008,LOAN_ACCOUNT,currency_code,validity,currency_code is a three-letter ISO 4217 code,error,0 invalid codes,Example Analyst,EVD-0001,draft

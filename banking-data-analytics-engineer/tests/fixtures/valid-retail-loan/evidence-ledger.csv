@@ -1,0 +1,11 @@
+evidence_id,state,claim,source_locator,confidence,owner,validation_state
+EVD-0001,observed,"Synthetic loan account records carry an opening date, a currency code, and a portfolio segment (extract snapshot 2026-09-15)",extracts/loan_account_sample.csv#header,high,Example Data Owner,pending
+EVD-0002,observed,"Synthetic loan event records carry a posting date, an effective date, an event type, a signed amount, and an optional reversal link (extract snapshot 2026-09-15)",extracts/loan_event_sample.csv#header,high,Example Data Owner,pending
+EVD-0003,inferred,"Reversal rows negate their original event: reversal_link_id matches an existing event_id and the reversal amount is the negation of the original amount","inference from paired rows E-3004/E-3005 and E-3007/E-3008 in extracts/loan_event_sample.csv",medium,Example Analyst,pending
+EVD-0004,assumed,Analysis grain is calendar month of event effective date for this exercise,working assumption recorded for this example,low,Example Analyst,pending
+EVD-0005,question,"Whether and how non-VND amounts may be converted for reporting is unresolved; no documented FX conversion policy exists in this example","open question logged for this example (raised 2026-09-23)",low,Example Treasury Policy Owner,pending
+EVD-0006,observed,Synthetic party records are effective dated with one row per party per effective period,extracts/party_sample.csv#header,high,Example Data Owner,pending
+EVD-0007,observed,Fee events exist in the event extract with event_type FEE,extracts/loan_event_sample.csv row E-3003,high,Example Data Owner,pending
+EVD-0008,observed,"Reversal pairs in the sample: E-3005 reverses E-3004 with the negated amount, and E-3008 reverses E-3007 with the negated amount","extracts/loan_event_sample.csv rows E-3004, E-3005, E-3007, E-3008",high,Example Data Owner,pending
+EVD-0009,assumed,"Late-arriving events posted after the cutoff are held to the next reconciliation cycle in this example (bank late-arrival policy not yet supplied)",working assumption recorded for this example,low,Example Operations Owner,pending
+EVD-0010,question,"Whether a repayment-schedule extract exists to support days-past-due analysis is unresolved; no schedule source is present in this example","open question logged for this example (raised 2026-09-23)",low,Example Business Owner,pending

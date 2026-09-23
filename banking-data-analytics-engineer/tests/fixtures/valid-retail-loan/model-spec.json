@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "model_id": "MDL-0001",
+  "title": "Retail loan principal movement domain model (synthetic example)",
+  "status": "draft",
+  "evidence_ids": ["EVD-0001", "EVD-0002", "EVD-0003", "EVD-0006", "EVD-0007", "EVD-0008"],
+  "entities": [
+    {
+      "entity_id": "ENT-001",
+      "name": "Party",
+      "definition": "A person or organization that holds or owes a synthetic account.",
+      "grain": "one row per party per effective period",
+      "business_keys": ["party_id", "effective_from"],
+      "temporal_strategy": "effective_dated",
+      "classification": "internal-synthetic",
+      "evidence_ids": ["EVD-0006"],
+      "attributes": [
+        {"name": "party_id", "logical_type": "string", "definition": "Synthetic party identifier"},
+        {"name": "effective_from", "logical_type": "date", "definition": "Date this party version becomes effective"},
+        {"name": "effective_to", "logical_type": "date", "definition": "Date this party version ceases to be effective; blank while the version is current"},
+        {"name": "party_type", "logical_type": "string", "definition": "Person or organization"}
+      ]
+    },
+    {
+      "entity_id": "ENT-002",
+      "name": "LoanAccount",
+      "definition": "An agreement under which synthetic principal is advanced and repaid.",
+      "grain": "one row per loan account",
+      "business_keys": ["loan_account_id"],
+      "temporal_strategy": "current_state_with_status_history",
+      "classification": "internal-synthetic",
+      "evidence_ids": ["EVD-0001"],
+      "attributes": [
+        {"name": "loan_account_id", "logical_type": "string", "definition": "Synthetic loan account identifier"},
+        {"name": "party_id", "logical_type": "string", "definition": "Owning synthetic party"},
+        {"name": "opening_date", "logical_type": "date", "definition": "Date the synthetic account was opened"},
+        {"name": "currency_code", "logical_type": "string", "definition": "Currency of the synthetic balance and of this account's signed event amounts"},
+        {"name": "segment", "logical_type": "string", "definition": "Synthetic portfolio segment used for review prioritization; blank when unassigned"}
+      ]
+    },
+    {
+      "entity_id": "ENT-003",
+      "name": "LoanEvent",
+      "definition": "An immutable synthetic financial or lifecycle event on a loan account. Events carry a posting date (when recorded) and an effective date (the business date the movement applies to); movement analysis groups by the effective date.",
+      "grain": "one row per loan event",
+      "business_keys": ["event_id"],
+      "temporal_strategy": "immutable_append_only",
+      "classification": "internal-synthetic",
+      "evidence_ids": ["EVD-0002", "EVD-0007", "EVD-0008"],
+      "attributes": [
+        {"name": "event_id", "logical_type": "string", "definition": "Synthetic event identifier"},
+        {"name": "loan_account_id", "logical_type": "string", "definition": "Synthetic loan account the event belongs to"},
+        {"name": "event_type", "logical_type": "string", "definition": "Documented extract code list: DISBURSEMENT, PRINCIPAL_REPAYMENT, FEE, or REVERSAL"},
+        {"name": "effective_date", "logical_type": "date", "definition": "Business date the event applies to"},
+        {"name": "posted_date", "logical_type": "date", "definition": "Date the event was recorded in the extract"},
+        {"name": "event_amount", "logical_type": "decimal(18,2)", "definition": "Signed synthetic event amount: disbursements positive, principal repayments negative, reversal rows the negation of the reversed event"},
+        {"name": "reversal_link_id", "logical_type": "string", "definition": "event_id of the single original event this reversal negates; blank on non-reversal rows"}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "REL-001",
+      "from_entity": "ENT-001",
+      "to_entity": "ENT-002",
+      "cardinality": "one_to_many",
+      "optionality": "mandatory_parent",
+      "definition": "A party holds one or more synthetic loan accounts. Party versions are effective-dated: any join to party attributes must select the version effective at the analysis date (as-of join).",
+      "evidence_ids": ["EVD-0001", "EVD-0006"]
+    },
+    {
+      "relationship_id": "REL-002",
+      "from_entity": "ENT-002",
+      "to_entity": "ENT-003",
+      "cardinality": "one_to_many",
+      "optionality": "mandatory_parent",
+      "definition": "A loan account records one or more synthetic events.",
+      "evidence_ids": ["EVD-0002"]
+    },
+    {
+      "relationship_id": "REL-003",
+      "from_entity": "ENT-003",
+      "to_entity": "ENT-003",
+      "cardinality": "one_to_zero_or_one",
+      "optionality": "optional",
+      "definition": "Read from the original event to its reversal: an original event is reversed by at most one reversal event through reversal_link_id, and every reversal reverses exactly one original event.",
+      "evidence_ids": ["EVD-0003", "EVD-0008"]
+    }
+  ]
+}

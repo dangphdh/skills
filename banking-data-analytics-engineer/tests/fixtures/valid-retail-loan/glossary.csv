@@ -1,0 +1,8 @@
+term_id,term,aliases,definition,avoid_terms,evidence_ids,owner,status
+TERM-001,Party,client;counterparty,A person or organization that holds or owes a synthetic account,customer (ambiguous),EVD-0006,Example Analyst,proposed
+TERM-002,Loan Account,facility,"An agreement under which synthetic principal is advanced and repaid; carries an opening date, a currency, and a portfolio segment",loan (unqualified),EVD-0001,Example Analyst,proposed
+TERM-003,Loan Event,movement,An immutable synthetic financial or lifecycle event on a loan account carrying a signed amount,transaction (unqualified),EVD-0002,Example Analyst,proposed
+TERM-004,Reversal,negation,"A synthetic event that negates exactly one previously posted event; it carries the negated amount and reversal_link_id, and matched original-reversal pairs are excluded together in this analysis",chargeback,EVD-0003;EVD-0008,Example Analyst,proposed
+TERM-005,Effective date,value date,The business date a synthetic event applies to for movement analysis,posting date (distinct concept),EVD-0002,Example Analyst,proposed
+TERM-006,Posting date,record date,The date a synthetic event was recorded in the extract,effective date (distinct concept),EVD-0002,Example Analyst,proposed
+TERM-007,Portfolio segment,segment,Coarse synthetic grouping of loan accounts used for review prioritization,risk grade (different concept),EVD-0001,Example Analyst,proposed

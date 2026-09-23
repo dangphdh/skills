@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "reconciliation_id": "RECONCILIATION_ID",
+  "status": "draft",
+  "evidence_ids": [],
+  "source_population": "REPLACE_WITH_SOURCE_POPULATION",
+  "target_population": "REPLACE_WITH_TARGET_POPULATION",
+  "grain": "",
+  "matching_keys": [],
+  "time_context": {
+    "business_date": "",
+    "cutoff": "",
+    "timezone": "",
+    "late_arrival_rule": ""
+  },
+  "currency_controls": {
+    "mode": "",
+    "currencies": [],
+    "conversion_rule": ""
+  },
+  "tolerances": {
+    "count_absolute": "0",
+    "amount_absolute": "0.00",
+    "amount_percentage": "0.00"
+  },
+  "controls": [],
+  "exception_management": {
+    "owner": "",
+    "workflow": "",
+    "evidence_retention": ""
+  },
+  "human_approval": {
+    "name": "",
+    "date": ""
+  }
+}
